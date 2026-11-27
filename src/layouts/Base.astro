@@ -22,6 +22,8 @@ const jsonLd = {
   logo: new URL('/icons/icon-512.png', site).href,
   image: ogImage,
   telephone: contact.telephoneInternational,
+  email: contact.email,
+  ...(contact.pageOfficielle ? { sameAs: [contact.pageOfficielle] } : {}),
   areaServed: contact.zoneDesservie,
   address: { '@type': 'PostalAddress', addressLocality: contact.ville, addressCountry: 'BJ' },
   knowsAbout: ['Création de logo', 'Création de site web', 'Fiche Google', 'Community management'],
