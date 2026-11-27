@@ -11,7 +11,7 @@ export const contact = {
   whatsapp:
     'https://wa.me/2290154888881?text=Bonjour%20BIDOSS%20PARAISO%2C%20je%20souhaite%20un%20devis%20pour%20ma%20pr%C3%A9sence%20en%20ligne.',
   /** Lien de la page officielle (Facebook…). Laissez '' tant qu'il n'existe pas. */
-  pageOfficielle: '',
+  pageOfficielle: 'https://www.facebook.com/bidossParaiso',
   email: 'bidossparaiso@gmail.com',
   ville: 'Cotonou',
   zoneDesservie: 'Bénin',
@@ -121,6 +121,14 @@ export const realisations = {
       image: 'portfolio-isidore-laly.png',
       alt: 'Page d’accueil du portfolio d’Isidore Laly',
       lien: 'https://isidorelaly-sys.github.io/Portfolio/',
+    },
+    {
+      titre: 'MoMo Manager',
+      secteur: 'Gestion de points de vente Mobile Money',
+      travail: 'Application web',
+      image: 'momo-manager.jpg',
+      alt: 'Écran de connexion de l’application MoMo Manager',
+      lien: 'https://momo-manager1-dashboard.netlify.app/',
     },
   ],
   prochaine: {
