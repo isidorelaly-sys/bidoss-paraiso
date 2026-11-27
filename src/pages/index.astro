@@ -1,0 +1,37 @@
+---
+import Base from '../layouts/Base.astro';
+import Entete from '../components/sections/Entete.astro';
+import Hero from '../components/sections/Hero.astro';
+import Constat from '../components/sections/Constat.astro';
+import Services from '../components/sections/Services.astro';
+import Demo from '../components/sections/Demo.astro';
+import Methode from '../components/sections/Methode.astro';
+import Realisations from '../components/sections/Realisations.astro';
+import Pourquoi from '../components/sections/Pourquoi.astro';
+import Faq from '../components/sections/Faq.astro';
+import CtaFinal from '../components/sections/CtaFinal.astro';
+import Pied from '../components/sections/Pied.astro';
+import WhatsAppFlottant from '../components/sections/WhatsAppFlottant.astro';
+---
+
+<Base>
+  <Entete />
+  <main id="contenu">
+    <Hero />
+    <Constat />
+    <Services />
+    <Demo />
+    <Methode />
+    <Realisations />
+    <Pourquoi />
+    <Faq />
+    <CtaFinal />
+  </main>
+  <Pied />
+  <WhatsAppFlottant />
+  <div class="curseur" aria-hidden="true" data-curseur></div>
+</Base>
+
+<script>
+  import '../scripts/main';
+</script>

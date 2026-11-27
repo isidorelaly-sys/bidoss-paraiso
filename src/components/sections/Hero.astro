@@ -1,0 +1,237 @@
+---
+import Logo from '../ui/Logo.astro';
+import Bouton from '../ui/Bouton.astro';
+import { contact, hero, seo } from '../../content/textes';
+
+const mots = hero.titre.split(' ');
+---
+
+<section id="haut" class="hero fond-petrole fond-sombre motif-hex" data-hero aria-labelledby="hero-titre">
+  <canvas class="hero__reseau" data-reseau aria-hidden="true"></canvas>
+
+  <div class="conteneur hero__grille">
+    <div class="hero__marque">
+      <Logo variante="logo_vertical" couleur="couleur" class="hero__logo" id="logo-intro" />
+      <p class="sr-only">{seo.slogan}</p>
+    </div>
+
+    <div class="hero__texte">
+      <h1 id="hero-titre" class="titre-1 hero__titre">
+        {mots.map((m, i) => (
+          <>
+            <span class="mot" style={`--i:${i}`}><span class="mot__in">{m}</span></span>{i < mots.length - 1 ? ' ' : ''}
+          </>
+        ))}
+      </h1>
+      <p class="hero__sous-titre">{hero.sousTitre}</p>
+      <div class="hero__actions">
+        <Bouton href={contact.whatsapp} icone="whatsapp" taille="grand" externe>{hero.boutonPrincipal}</Bouton>
+        <Bouton href="#methode" variante="secondaire-fonce" taille="grand">{hero.boutonSecondaire}</Bouton>
+      </div>
+    </div>
+  </div>
+
+  <button type="button" class="hero__passer" data-passer-intro>{hero.passer}</button>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    min-height: 100svh;
+    display: flex;
+    align-items: center;
+    padding: 88px 0 56px;
+    overflow: hidden;
+  }
+  .hero__reseau {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    animation: fondu 1.2s 0.6s var(--ease-out-power3) both;
+  }
+  .hero__grille {
+    display: grid;
+    gap: 2rem;
+    justify-items: center;
+    text-align: center;
+  }
+  .hero__marque {
+    width: 200px;
+  }
+  .hero__marque :global(.hero__logo) {
+    width: 100%;
+    height: auto;
+    overflow: visible;
+  }
+  .hero__titre {
+    color: var(--or);
+    max-width: 14ch;
+    margin-inline: auto;
+  }
+  .hero__sous-titre {
+    margin: 1.25rem auto 0;
+    max-width: 34ch;
+    font-size: 1.0625rem;
+  }
+  .hero__actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 2rem;
+  }
+  .hero__passer {
+    display: none;
+    position: absolute;
+    right: var(--gouttiere);
+    bottom: 16px;
+    padding: 10px 12px;
+    font-size: 0.8125rem;
+    color: var(--ivoire);
+    opacity: 0.8;
+    animation: disparait 0.4s 2.4s both;
+  }
+  :global(html.js) .hero__passer {
+    display: block;
+  }
+  @media (min-width: 960px) {
+    .hero__grille {
+      grid-template-columns: 1.25fr 0.75fr;
+      justify-items: start;
+      text-align: left;
+      gap: 4rem;
+      align-items: center;
+    }
+    .hero__marque {
+      order: 2;
+      width: 340px;
+      justify-self: center;
+    }
+    .hero__titre,
+    .hero__sous-titre {
+      margin-inline: 0;
+    }
+    .hero__titre {
+      font-size: clamp(3.5rem, 6vw, 5.5rem);
+      max-width: 12ch;
+    }
+    .hero__sous-titre {
+      font-size: 1.25rem;
+      max-width: 30ch;
+    }
+    .hero__actions {
+      flex-direction: row;
+    }
+  }
+
+  /* ===== Intro (CSS pur : démarre à la première image, sans attendre le JS) =====
+     0,00 s  3 nœuds   · 0,35 s traits + centre · 0,70 s hexagone tracé
+     1,25 s  BIDOSS PARAISO · 1,55 s slogan · 0,80 s titre mot par mot
+     1,70 s  sous-titre · 1,85 s boutons → fin ≈ 2,4 s                        */
+  .hero :global(.l-noeud),
+  .hero :global(.l-centre) {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: noeud 0.6s var(--ease-out-expo) both;
+  }
+  .hero :global(.l-noeud-1) { animation-delay: 0s; }
+  .hero :global(.l-noeud-2) { animation-delay: 0.08s; }
+  .hero :global(.l-noeud-3) { animation-delay: 0.16s; }
+  .hero :global(.l-centre) { animation-delay: 0.5s; }
+  .hero :global(.l-traits) {
+    stroke-dasharray: 30;
+    animation: trait-centre 0.5s 0.35s var(--ease-out-power3) both;
+  }
+  .hero :global(.l-hex) {
+    stroke-dasharray: 336;
+    animation: trace-hex 0.9s 0.7s var(--ease-inout-power2) both;
+  }
+  .hero :global(.l-txt) {
+    animation: monte 0.8s var(--ease-out-expo) both;
+  }
+  .hero :global(.l-txt-1) { animation-delay: 1.25s; }
+  .hero :global(.l-txt-2) { animation-delay: 1.33s; }
+  .hero :global(.l-txt-3) { animation-delay: 1.55s; }
+
+  .mot {
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: top;
+    padding-bottom: 0.08em;
+  }
+  .mot__in {
+    display: inline-block;
+    animation: mot 0.8s calc(0.8s + var(--i) * 0.06s) var(--ease-out-expo) both;
+  }
+  /* Masque : un volet couleur fond se retire (le texte est peint dès la 1re image) */
+  .mot::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--petrole);
+    transform-origin: right;
+    animation: volet 0.7s calc(0.8s + var(--i) * 0.06s) var(--ease-out-expo) both;
+  }
+  .hero__sous-titre {
+    animation: monte 0.8s 1.7s var(--ease-out-expo) both;
+  }
+  .hero__actions {
+    animation: monte 0.8s 1.85s var(--ease-out-expo) both;
+  }
+
+  /* Intro passée (clic, scroll, touche) : tout prend son état final */
+  .hero.intro-passee :global(*),
+  .hero.intro-passee .mot::after {
+    animation: none !important;
+  }
+  .hero.intro-passee .mot::after {
+    transform: scaleX(0);
+  }
+
+  @keyframes noeud {
+    from { scale: 0; }
+  }
+  @keyframes trait-centre {
+    from { stroke-dashoffset: 30; }
+    to { stroke-dashoffset: 0; }
+  }
+  @keyframes trace-hex {
+    from { stroke-dashoffset: 336; }
+    to { stroke-dashoffset: 0; }
+  }
+  /* « translate » (et non « transform ») : ne remplace pas le transform des calques SVG */
+  @keyframes monte {
+    from { opacity: 0; translate: 0 16px; }
+  }
+  @keyframes mot {
+    from { translate: 0 45%; }
+  }
+  @keyframes volet {
+    from { transform: scaleX(1); }
+    to { transform: scaleX(0); }
+  }
+  @keyframes disparait {
+    to { opacity: 0; visibility: hidden; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero :global(*),
+    .hero__sous-titre,
+    .hero__actions,
+    .mot__in {
+      animation: fondu 150ms both !important;
+    }
+    .mot::after {
+      animation: none !important;
+      transform: scaleX(0);
+    }
+    .hero__passer {
+      display: none;
+    }
+  }
+  @keyframes fondu {
+    from { opacity: 0; }
+  }
+</style>

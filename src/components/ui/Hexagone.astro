@@ -1,0 +1,41 @@
+---
+/** Forme hexagonale (pointe en haut) : carte, masque ou cadre. */
+interface Props {
+  as?: 'div' | 'article' | 'li';
+  class?: string;
+}
+const { as: Balise = 'div', class: classe = '' } = Astro.props;
+---
+
+<Balise class:list={['hexagone', classe]}>
+  <svg class="hexagone__contour" viewBox="0 0 100 115.47" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+    <polygon points="50,1 99,29.13 99,86.34 50,114.47 1,86.34 1,29.13" pathLength="1" vector-effect="non-scaling-stroke" />
+  </svg>
+  <div class="hexagone__contenu"><slot /></div>
+</Balise>
+
+<style>
+  .hexagone {
+    position: relative;
+    aspect-ratio: 100 / 115.47;
+    clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
+  }
+  .hexagone__contour {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    fill: none;
+    stroke: var(--or);
+    stroke-width: 2;
+  }
+  .hexagone__contenu {
+    position: absolute;
+    inset: 18% 14%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+</style>

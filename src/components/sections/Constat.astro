@@ -1,0 +1,113 @@
+---
+import Icone from '../ui/Icone.astro';
+import Pastille from '../ui/Pastille.astro';
+import { constat } from '../../content/textes';
+---
+
+<section class="constat fond-ivoire" aria-labelledby="constat-titre" data-section="constat">
+  <div class="conteneur constat__grille">
+    <div class="constat__texte" data-revele>
+      <h2 id="constat-titre" class="titre-2 text-petrole">{constat.titre}</h2>
+      <p class="mt-5 max-w-[42ch] text-lg">{constat.texte}</p>
+    </div>
+
+    <div class="recherche" data-recherche aria-hidden="true">
+      <div class="recherche__barre">
+        <Icone nom="recherche" taille={20} />
+        <span class="recherche__saisie" data-saisie data-texte={constat.recherche}>{constat.recherche}</span><span class="recherche__curseur"></span>
+      </div>
+      <ul class="recherche__resultats">
+        <li class="resultat" data-resultat><span class="barre barre--titre"></span><span class="barre"></span><span class="barre barre--courte"></span></li>
+        <li class="resultat" data-resultat><span class="barre barre--titre"></span><span class="barre"></span><span class="barre barre--courte"></span></li>
+        <li class="resultat resultat--vous" data-resultat>
+          <Pastille ton="alerte">{constat.resultatVide}</Pastille>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .constat {
+    padding: clamp(5rem, 12vw, 9rem) 0;
+  }
+  .constat__grille {
+    display: grid;
+    gap: 3rem;
+    align-items: center;
+  }
+  @media (min-width: 960px) {
+    .constat__grille {
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+    }
+  }
+  .recherche {
+    width: 100%;
+    max-width: 30rem;
+    justify-self: center;
+  }
+  .recherche__barre {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 20px;
+    border: 2px solid var(--petrole);
+    border-radius: 999px;
+    background: var(--ivoire);
+    color: var(--petrole);
+    font-size: 1.0625rem;
+    min-height: 60px;
+  }
+  .recherche__saisie {
+    color: var(--ardoise);
+    white-space: nowrap;
+  }
+  .recherche__curseur {
+    width: 2px;
+    height: 1.2em;
+    margin-left: 2px;
+    background: var(--petrole);
+    animation: clignote 1s steps(1) infinite; /* 1 Hz, sous le seuil de 3 Hz */
+  }
+  @keyframes clignote {
+    50% { opacity: 0; }
+  }
+  .recherche__resultats {
+    display: grid;
+    gap: 12px;
+    margin-top: 16px;
+  }
+  .resultat {
+    display: grid;
+    gap: 8px;
+    padding: 16px 20px;
+    border-radius: var(--rayon);
+    background: var(--ivoire);
+    border: 1px solid color-mix(in srgb, var(--ardoise) 12%, transparent);
+  }
+  .barre {
+    height: 10px;
+    border-radius: 5px;
+    background: color-mix(in srgb, var(--ardoise) 14%, transparent);
+  }
+  .barre--titre {
+    width: 55%;
+    height: 14px;
+    background: color-mix(in srgb, var(--petrole) 35%, transparent);
+  }
+  .barre--courte {
+    width: 70%;
+  }
+  .resultat--vous {
+    border: 2px dashed color-mix(in srgb, var(--petrole) 55%, transparent);
+    background: transparent;
+    min-height: 82px;
+    place-items: center;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .recherche__curseur {
+      animation: none;
+    }
+  }
+</style>

@@ -1,0 +1,78 @@
+---
+import Logo from '../ui/Logo.astro';
+import Icone from '../ui/Icone.astro';
+import { contact, footer, menu } from '../../content/textes';
+---
+
+<footer class="pied fond-nuit fond-sombre">
+  <div class="conteneur pied__grille">
+    <a href="#haut" aria-label="BIDOSS PARAISO, retour en haut" class="pied__logo">
+      <Logo variante="logo_horizontal" couleur="couleur" decoratif class="w-56 h-auto" />
+    </a>
+    <nav aria-label="Liens du pied de page">
+      <ul class="pied__liens">
+        {menu.map((m) => <li><a class="lien-souligne" href={m.ancre}>{m.libelle}</a></li>)}
+      </ul>
+    </nav>
+    <div class="pied__contact">
+      <a class="pied__wa" href={contact.whatsapp} target="_blank" rel="noopener">
+        <Icone nom="whatsapp" taille={20} /> WhatsApp : {contact.telephoneAffiche}
+      </a>
+      <p>Facebook : {contact.facebook}</p>
+    </div>
+  </div>
+  <div class="conteneur pied__bas">
+    <p>{footer.copyright}</p>
+    <a class="lien-souligne" href="/mentions-legales">{footer.mentions}</a>
+  </div>
+</footer>
+
+<style>
+  .pied {
+    padding: 4rem 0 6rem;
+    border-top: 1px solid color-mix(in srgb, var(--or) 30%, transparent);
+  }
+  .pied__grille {
+    display: grid;
+    gap: 2.5rem;
+  }
+  @media (min-width: 960px) {
+    .pied__grille {
+      grid-template-columns: 1.2fr 1fr 1fr;
+      align-items: start;
+    }
+    .pied {
+      padding-bottom: 3rem;
+    }
+  }
+  .pied__liens {
+    display: grid;
+    gap: 0.75rem;
+    font-weight: 600;
+  }
+  .pied__liens a,
+  .pied__wa {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 32px;
+  }
+  .pied__contact {
+    display: grid;
+    gap: 0.75rem;
+  }
+  .pied__wa {
+    font-weight: 600;
+    color: var(--or-pale);
+  }
+  .pied__bas {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid color-mix(in srgb, var(--ivoire) 15%, transparent);
+    font-size: 0.875rem;
+  }
+</style>

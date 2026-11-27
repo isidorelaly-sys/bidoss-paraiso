@@ -1,0 +1,50 @@
+---
+import Base from '../layouts/Base.astro';
+import Logo from '../components/ui/Logo.astro';
+import { contact } from '../content/textes';
+---
+
+<Base titre="Mentions légales | BIDOSS PARAISO" description="Mentions légales du site BIDOSS PARAISO : éditeur, hébergeur, données personnelles.">
+  <header class="fond-petrole fond-sombre py-6">
+    <div class="conteneur flex items-center justify-between gap-4">
+      <a href="/" aria-label="BIDOSS PARAISO, retour à l'accueil">
+        <Logo variante="logo_horizontal_sans-slogan" couleur="couleur" decoratif class="h-12 w-auto" />
+      </a>
+      <a href="/" class="lien-souligne font-semibold">Retour à l'accueil</a>
+    </div>
+  </header>
+  <main id="contenu" class="fond-ivoire py-16">
+    <article class="conteneur max-w-3xl space-y-8 mentions">
+      <h1 class="titre-2 text-petrole">Mentions légales</h1>
+      <section>
+        <h2>Éditeur du site</h2>
+        <p>BIDOSS PARAISO</p>
+        <p>Responsable de la publication : OUSSOU LALY Isidore Jean de Dieu</p>
+        <p>Adresse : [à compléter]</p>
+        <p>Numéro IFU : [à compléter] · RCCM : [à compléter]</p>
+        <p>Téléphone et WhatsApp : {contact.telephoneAffiche}</p>
+        <p>E-mail : {contact.email}</p>
+      </section>
+      <section>
+        <h2>Hébergement</h2>
+        <p>[à compléter : nom, adresse et contact de l'hébergeur]</p>
+      </section>
+      <section>
+        <h2>Propriété intellectuelle</h2>
+        <p>Le logo, les textes et les visuels de ce site appartiennent à BIDOSS PARAISO. [à compléter]</p>
+      </section>
+      <section>
+        <h2>Données personnelles</h2>
+        <p>Ce site ne dépose aucun cookie et ne collecte aucune donnée. Quand vous nous écrivez sur WhatsApp, vos messages sont traités par WhatsApp. [à compléter]</p>
+      </section>
+    </article>
+  </main>
+</Base>
+
+<style>
+  .mentions h2 {
+    font-size: 1.375rem;
+    color: var(--petrole);
+    margin-bottom: 0.5rem;
+  }
+</style>

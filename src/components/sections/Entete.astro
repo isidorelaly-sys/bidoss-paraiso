@@ -1,0 +1,189 @@
+---
+import Logo from '../ui/Logo.astro';
+import Icone from '../ui/Icone.astro';
+import { contact, menu } from '../../content/textes';
+---
+
+<header class="entete fond-sombre" data-entete>
+  <div class="conteneur entete__barre">
+    <a href="#haut" class="entete__logo" aria-label="BIDOSS PARAISO, retour en haut">
+      <Logo variante="logo_horizontal_sans-slogan" couleur="couleur" decoratif class="w-[120px] h-auto" />
+    </a>
+
+    <nav class="entete__nav" aria-label="Navigation principale">
+      <ul>
+        {menu.map((m) => (
+          <li><a class="lien-souligne" href={m.ancre}>{m.libelle}</a></li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="entete__actions">
+      <a class="progression" href="#haut" aria-label="Progression de lecture, revenir en haut" data-progression>
+        <svg viewBox="0 0 40 46" aria-hidden="true" focusable="false">
+          <polygon class="progression__fond" points="20,2 38,12.5 38,33.5 20,44 2,33.5 2,12.5" />
+          <polygon class="progression__trait" points="20,2 38,12.5 38,33.5 20,44 2,33.5 2,12.5" pathLength="1" />
+        </svg>
+        <span class="progression__chiffre" data-progression-chiffre aria-hidden="true">0</span>
+      </a>
+      <a class="entete__wa" href={contact.whatsapp} target="_blank" rel="noopener" data-magnetique>
+        <Icone nom="whatsapp" taille={18} />
+        <span>WhatsApp</span>
+      </a>
+      <details class="menu-mobile">
+        <summary aria-label="Ouvrir le menu">
+          <span class="burger" aria-hidden="true"><span></span><span></span></span>
+        </summary>
+        <nav class="menu-mobile__panneau fond-nuit" aria-label="Menu">
+          <ul>
+            {menu.map((m) => (
+              <li><a href={m.ancre}>{m.libelle}</a></li>
+            ))}
+          </ul>
+        </nav>
+      </details>
+    </div>
+  </div>
+</header>
+
+<style>
+  .entete {
+    position: fixed;
+    inset: 0 0 auto 0;
+    z-index: 50;
+    color: var(--ivoire);
+    transition:
+      background-color 0.4s var(--ease-out-power3),
+      transform 0.4s var(--ease-out-power3);
+  }
+  .entete.est-defile {
+    background: color-mix(in srgb, var(--nuit) 94%, transparent);
+  }
+  .entete.est-cache {
+    transform: translateY(-100%);
+  }
+  .entete__barre {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    height: 64px;
+  }
+  .entete__logo {
+    display: flex;
+    align-items: center;
+    transition: opacity 0.4s var(--ease-out-power3);
+  }
+  /* Sur l'accueil, le logo animé du hero suffit : celui-ci arrive au défilement */
+  :global(html.js) .entete__logo {
+    opacity: 0;
+  }
+  :global(html.js) .entete.est-defile .entete__logo,
+  :global(html.js) .entete__logo:focus-visible {
+    opacity: 1;
+  }
+  .entete__nav {
+    display: none;
+  }
+  .entete__nav ul {
+    display: flex;
+    gap: 2rem;
+    font-weight: 600;
+    font-size: 0.9375rem;
+  }
+  .entete__actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .entete__wa {
+    display: none;
+    align-items: center;
+    gap: 8px;
+    min-height: 44px;
+    padding: 10px 18px;
+    border-radius: var(--rayon);
+    background: var(--or);
+    color: var(--nuit);
+    font-weight: 600;
+    font-size: 0.9375rem;
+  }
+  .progression {
+    position: relative;
+    width: 40px;
+    height: 46px;
+    display: grid;
+    place-items: center;
+  }
+  .progression svg {
+    position: absolute;
+    inset: 0;
+    fill: none;
+    stroke-width: 2;
+    stroke-linejoin: round;
+  }
+  .progression__fond {
+    stroke: color-mix(in srgb, var(--ivoire) 25%, transparent);
+  }
+  .progression__trait {
+    stroke: var(--or);
+    stroke-dasharray: 1;
+    stroke-dashoffset: calc(1 - var(--progression, 0));
+  }
+  .progression__chiffre {
+    font: 600 0.6875rem/1 var(--font-texte);
+    font-variant-numeric: tabular-nums;
+  }
+  .menu-mobile summary {
+    list-style: none;
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    cursor: pointer;
+  }
+  .menu-mobile summary::-webkit-details-marker {
+    display: none;
+  }
+  .burger {
+    display: grid;
+    gap: 6px;
+    width: 22px;
+  }
+  .burger span {
+    height: 2px;
+    border-radius: 2px;
+    background: currentColor;
+    transition: transform 0.3s var(--ease-out-power3);
+  }
+  .menu-mobile[open] .burger span:first-child {
+    transform: translateY(4px) rotate(45deg);
+  }
+  .menu-mobile[open] .burger span:last-child {
+    transform: translateY(-4px) rotate(-45deg);
+  }
+  .menu-mobile__panneau {
+    position: fixed;
+    top: 64px;
+    left: 0;
+    right: 0;
+    padding: 1rem var(--gouttiere) 2rem;
+    border-top: 1px solid color-mix(in srgb, var(--or) 40%, transparent);
+  }
+  .menu-mobile__panneau a {
+    display: block;
+    padding: 14px 0;
+    font: 600 1.25rem/1.2 var(--font-titre);
+  }
+  @media (min-width: 960px) {
+    .entete__nav {
+      display: block;
+    }
+    .entete__wa {
+      display: inline-flex;
+    }
+    .menu-mobile {
+      display: none;
+    }
+  }
+</style>

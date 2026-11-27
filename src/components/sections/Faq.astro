@@ -1,0 +1,95 @@
+---
+import Icone from '../ui/Icone.astro';
+import Bouton from '../ui/Bouton.astro';
+import { contact, faq } from '../../content/textes';
+---
+
+<section id="faq" class="faq fond-ivoire" aria-labelledby="faq-titre">
+  <div class="conteneur faq__grille">
+    <div data-revele>
+      <p class="surtitre text-petrole">{faq.surtitre}</p>
+      <h2 id="faq-titre" class="titre-2 text-petrole mt-3">{faq.titre}</h2>
+    </div>
+    <div class="questions">
+      {faq.questions.map((q) => (
+        <details class="question" name="faq">
+          <summary>
+            <span>{q.q}</span>
+            <Icone nom="plus" taille={22} class="question__icone" />
+          </summary>
+          <div class="question__reponse"><p>{q.r}</p></div>
+        </details>
+      ))}
+      <div class="faq__autre">
+        <p class="font-titre font-semibold text-petrole text-lg">{faq.autreQuestion}</p>
+        <Bouton href={contact.whatsapp} icone="whatsapp" variante="secondaire-clair" externe>{faq.autreBouton}</Bouton>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .faq {
+    padding: clamp(5rem, 12vw, 9rem) 0;
+  }
+  .faq__grille {
+    display: grid;
+    gap: 2.5rem;
+  }
+  @media (min-width: 960px) {
+    .faq__grille {
+      grid-template-columns: 0.8fr 1.2fr;
+      gap: 5rem;
+    }
+  }
+  .faq__autre {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem 1.5rem;
+    margin-top: 2rem;
+  }
+  .question {
+    border-bottom: 1px solid color-mix(in srgb, var(--ardoise) 20%, transparent);
+  }
+  .question summary {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    min-height: 64px;
+    padding: 1rem 0;
+    cursor: pointer;
+    font: 600 1.125rem/1.35 var(--font-titre);
+    color: var(--petrole);
+  }
+  .question summary::-webkit-details-marker {
+    display: none;
+  }
+  .question summary :global(.question__icone) {
+    flex: none;
+    transition: rotate 0.4s var(--ease-inout-power2);
+  }
+  .question[open] summary :global(.question__icone) {
+    rotate: 45deg;
+  }
+  .question__reponse {
+    padding: 0 0 1.25rem;
+    max-width: 60ch;
+  }
+  /* Ouverture fluide quand le navigateur le permet */
+  @supports (interpolate-size: allow-keywords) {
+    .question {
+      interpolate-size: allow-keywords;
+    }
+    .question::details-content {
+      block-size: 0;
+      overflow: clip;
+      transition: block-size 0.4s var(--ease-inout-power2), content-visibility 0.4s allow-discrete;
+    }
+    .question[open]::details-content {
+      block-size: auto;
+    }
+  }
+</style>

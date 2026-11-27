@@ -1,0 +1,72 @@
+---
+/**
+ * Insère un logo OFFICIEL du dossier assets/logo/ tel quel.
+ * Aucun tracé n'est modifié : on retire seulement les métadonnées
+ * et on ajoute des classes sur les calques existants pour l'animation :
+ *   .l-hex (hexagone) · .l-traits (traits) · .l-centre · .l-noeud (×3)
+ *   .l-txt .l-txt-1 (BIDOSS) .l-txt-2 (PARAISO) .l-txt-3 (slogan)
+ */
+const fichiers = import.meta.glob<string>('/assets/logo/*.svg', {
+  query: '?raw',
+  import: 'default',
+  eager: true,
+});
+
+export type Variante =
+  | 'logo_vertical'
+  | 'logo_vertical_sans-slogan'
+  | 'logo_horizontal'
+  | 'logo_horizontal_sans-slogan'
+  | 'icone'
+  | 'favicon';
+export type Couleur = 'couleur' | 'petrole' | 'nuit' | 'noir' | 'blanc';
+
+interface Props {
+  variante: Variante;
+  couleur: Couleur;
+  class?: string;
+  /** true : purement décoratif (le nom est déjà écrit à côté). */
+  decoratif?: boolean;
+  id?: string;
+}
+
+const { variante, couleur, class: classe = '', decoratif = false, id } = Astro.props;
+const chemin = `/assets/logo/bidoss-paraiso_${variante}_${couleur}.svg`;
+const brut = fichiers[chemin];
+if (!brut) throw new Error(`Logo introuvable : ${chemin}`);
+
+let svg = brut
+  .replace(/<metadata>[\s\S]*?<\/metadata>/g, '')
+  .replace(/\s+xmlns:c2pa="[^"]*"/g, '')
+  .replace(/<title>[\s\S]*?<\/title>/, '');
+
+// Racine : on garde le viewBox, la taille vient du CSS.
+svg = svg.replace(/<svg([^>]*?)\swidth="[^"]*"\sheight="[^"]*"/, '<svg$1');
+const attrs = decoratif
+  ? 'aria-hidden="true" focusable="false"'
+  : 'role="img" aria-label="BIDOSS PARAISO"';
+svg = svg.replace(/\srole="img"\saria-label="[^"]*"/, '');
+svg = svg.replace(
+  '<svg',
+  `<svg class="logo ${classe}" ${attrs}${id ? ` id="${id}"` : ''} data-logo="${variante}"`,
+);
+
+// Calques du symbole (dans le premier <g>)
+svg = svg.replace(/<g([^>]*)>([\s\S]*?)<\/g>/, (_m, gAttrs: string, contenu: string) => {
+  let n = 0;
+  const c = contenu
+    .replace('<polygon', '<polygon class="l-hex"')
+    .replace('<path', '<path class="l-traits"')
+    .replace(/<circle/g, () => (n++ === 0 ? '<circle class="l-centre"' : `<circle class="l-noeud l-noeud-${n - 1}"`));
+  return `<g class="l-symbole"${gAttrs}>${c}</g>`;
+});
+
+// Calques du texte (chemins après le symbole)
+let t = 0;
+svg = svg.replace(/<\/g>([\s\S]*)<\/svg>/, (_m, reste: string) => {
+  const r = reste.replace(/<path/g, () => `<path class="l-txt l-txt-${++t}"`);
+  return `</g>${r}</svg>`;
+});
+---
+
+<Fragment set:html={svg} />

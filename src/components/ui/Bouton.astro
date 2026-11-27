@@ -1,0 +1,85 @@
+---
+import Icone, { type NomIcone } from './Icone.astro';
+
+interface Props {
+  href: string;
+  variante?: 'principal' | 'secondaire-clair' | 'secondaire-fonce';
+  taille?: 'normal' | 'grand';
+  icone?: NomIcone;
+  externe?: boolean;
+  class?: string;
+}
+const {
+  href,
+  variante = 'principal',
+  taille = 'normal',
+  icone,
+  externe = false,
+  class: classe = '',
+} = Astro.props;
+---
+
+<a
+  href={href}
+  class:list={['bouton', `bouton--${variante}`, `bouton--${taille}`, classe]}
+  data-magnetique
+  {...externe ? { target: '_blank', rel: 'noopener' } : {}}
+>
+  <span class="bouton__contenu">
+    {icone && <Icone nom={icone} taille={20} />}
+    <span><slot /></span>
+  </span>
+  {externe && <span class="sr-only"> (s'ouvre dans WhatsApp)</span>}
+</a>
+
+<style>
+  .bouton {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
+    padding: 14px 24px;
+    border-radius: var(--rayon);
+    font: 600 0.9375rem/1.2 var(--font-texte);
+    text-decoration: none;
+    box-shadow: none;
+    transition:
+      background-color 0.3s var(--ease-out-power3),
+      color 0.3s var(--ease-out-power3);
+    -webkit-tap-highlight-color: transparent;
+  }
+  .bouton--grand {
+    min-height: 60px;
+    padding: 18px 32px;
+    font-size: 1.0625rem;
+  }
+  .bouton__contenu {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    pointer-events: none;
+  }
+  .bouton--principal {
+    background: var(--or);
+    color: var(--nuit);
+  }
+  .bouton--principal:hover {
+    background: var(--or-pale);
+  }
+  .bouton--secondaire-clair {
+    color: var(--petrole);
+    border: 2px solid var(--petrole);
+  }
+  .bouton--secondaire-clair:hover {
+    background: var(--petrole);
+    color: var(--ivoire);
+  }
+  .bouton--secondaire-fonce {
+    color: var(--ivoire);
+    border: 2px solid var(--or);
+  }
+  .bouton--secondaire-fonce:hover {
+    background: var(--or);
+    color: var(--nuit);
+  }
+</style>
