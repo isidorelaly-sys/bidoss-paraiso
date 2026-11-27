@@ -20,9 +20,7 @@ Rien n'a été inventé : ni tarif, ni délai, ni chiffre, ni témoignage, ni cl
 | 9 | **E-mail professionnel** | Mentions légales | `contact.email` |
 | 10 | **Ville** affichée | Données Google (JSON-LD) | `contact.ville` |
 | 11 | **Zone desservie** (ex. tout le Bénin, un département) | Données Google (JSON-LD) | `contact.zoneDesservie` |
-| 12 | **Adresse** de l'entreprise | Mentions légales | `src/pages/mentions-legales.astro` |
-| 13 | **Numéro IFU** et **RCCM** | Mentions légales | idem |
-| 14 | **Hébergeur** (nom, adresse, contact) | Mentions légales | idem |
+| 12 | **Ville du siège** (quartier Arafat, dans quelle ville ?) | Mentions légales | `src/pages/mentions-legales.astro` |
 | 15 | Phrase de **propriété intellectuelle** à valider | Mentions légales | idem |
 | 16 | Phrase **données personnelles** à valider | Mentions légales | idem |
 | 17 | **Nom de domaine** : pas pour l'instant, le site utilise l'adresse gratuite Cloudflare Pages (`bidoss-paraiso.pages.dev`). À changer le jour où un domaine est acheté | Liens de partage, sitemap | variable `SITE_URL` |
