@@ -7,7 +7,7 @@ Lighthouse 12, Chromium headless.
 
 | Profil | Performance | Accessibilité | Bonnes pratiques | SEO |
 |---|---|---|---|---|
-| **Mobile** (4G lente simulée, processeur ×4) | **100** | **100** | **100** | **100** |
+| **Mobile** (4G lente simulée, processeur ×4) | **99 à 100** selon la mesure | **100** | **100** | **100** |
 | Desktop | 100 | 100 | 100 | 100 |
 
 Rapports complets : [mobile](captures/lighthouse-mobile.html) · [desktop](captures/lighthouse-desktop.html).

@@ -14,12 +14,8 @@ Rien n'a été inventé : ni tarif, ni délai, ni chiffre, ni témoignage, ni cl
 | # | Élément | Où il apparaît | Fichier |
 |---|---|---|---|
 | 1 | **Ancien logo** (`avant.png`) pour le curseur avant / après | Réalisations | `assets/avant-apres/avant.png` (déposez simplement le fichier) |
-| 2 | **3 réalisations clients** : nom, secteur, ce qui a été fait, image, avec l'accord du client | Réalisations | `src/content/textes.ts` → `realisations.clients` |
-| 3 | Réponse FAQ : **délais** (en combien de temps le projet est prêt) | FAQ | `src/content/textes.ts` → `faq` |
-| 4 | Réponse FAQ : **étapes** | FAQ | idem |
-| 5 | Réponse FAQ : **documents à fournir** | FAQ | idem |
-| 6 | Réponse FAQ : **tarifs** (ou « Sur devis ») | FAQ | idem |
-| 7 | Réponse FAQ : **suivi** après la mise en ligne | FAQ | idem |
+| 2 | **Lien public du portfolio** (pour rendre la carte cliquable) et **prochaines réalisations** (capture dans `assets/realisations/` + accord du client) | Réalisations | `src/content/textes.ts` → `realisations.clients` |
+| 3 | Relire les **réponses de la FAQ** rédigées (aucun tarif ni délai chiffré, renvoi vers WhatsApp) | FAQ | `src/content/textes.ts` → `faq` |
 | 8 | **Lien de la page Facebook** | Pied de page | `src/content/textes.ts` → `contact.facebook` |
 | 9 | **E-mail professionnel** | Mentions légales | `contact.email` |
 | 10 | **Ville** affichée | Données Google (JSON-LD) | `contact.ville` |
@@ -29,7 +25,7 @@ Rien n'a été inventé : ni tarif, ni délai, ni chiffre, ni témoignage, ni cl
 | 14 | **Hébergeur** (nom, adresse, contact) | Mentions légales | idem |
 | 15 | Phrase de **propriété intellectuelle** à valider | Mentions légales | idem |
 | 16 | Phrase **données personnelles** à valider | Mentions légales | idem |
-| 17 | **Nom de domaine** définitif (ex. bidossparaiso.com, à vérifier et réserver) | Liens de partage, sitemap | `astro.config.mjs` |
+| 17 | **Nom de domaine** : pas pour l'instant, le site utilise l'adresse gratuite Cloudflare Pages (`bidoss-paraiso.pages.dev`). À changer le jour où un domaine est acheté | Liens de partage, sitemap | variable `SITE_URL` |
 | 18 | **Photos réelles** (équipe, terrain, lumière naturelle) — emplacements à prévoir dans une prochaine version | — | — |
 
 ## Textes à confirmer

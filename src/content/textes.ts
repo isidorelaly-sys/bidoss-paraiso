@@ -108,11 +108,25 @@ export const realisations = {
   apres: 'Après',
   curseurLibelle: 'Comparer l’ancien et le nouveau logo',
   avantManquant: '[Ancien logo à fournir]',
+  /**
+   * Réalisations clients. Pour en ajouter une : déposez une capture dans
+   * assets/realisations/ et copiez un bloc ci-dessous (lien facultatif : '' si aucun).
+   */
   clients: [
-    '[Réalisation client à fournir]',
-    '[Réalisation client à fournir]',
-    '[Réalisation client à fournir]',
+    {
+      titre: 'Portfolio d’Isidore Laly',
+      secteur: 'Chef de projet marketing digital',
+      travail: 'Site web',
+      image: 'portfolio-isidore-laly.png',
+      alt: 'Page d’accueil du portfolio d’Isidore Laly',
+      lien: '',
+    },
   ],
+  prochaine: {
+    titre: 'Votre projet, ici ?',
+    texte: 'La prochaine réalisation peut être la vôtre.',
+    bouton: 'En parler sur WhatsApp',
+  },
 } as const;
 
 export const pourquoi = {
@@ -130,12 +144,29 @@ export const faq = {
   surtitre: 'Questions fréquentes',
   titre: 'Vos questions, nos réponses.',
   questions: [
-    { q: 'En combien de temps mon projet est-il prêt ?', r: '[à compléter]' },
-    { q: 'Comment se passent les étapes ?', r: '[à compléter]' },
-    { q: 'Quels documents dois-je fournir ?', r: '[à compléter]' },
-    { q: 'Combien ça coûte ?', r: '[à compléter]' },
-    { q: 'Est-ce que vous assurez le suivi ?', r: '[à compléter]' },
+    {
+      q: 'En combien de temps mon projet est-il prêt ?',
+      r: 'Cela dépend de ce que vous demandez : un logo seul va plus vite qu’un site complet. Le délai précis est écrit dans votre devis, avant de commencer.',
+    },
+    {
+      q: 'Comment se passent les étapes ?',
+      r: 'On échange sur votre activité, on crée, vous validez, puis on met en ligne. Rien n’est publié sans votre accord.',
+    },
+    {
+      q: 'Quels documents dois-je fournir ?',
+      r: 'Le nom de votre entreprise, vos coordonnées et, si vous en avez, votre logo et des photos. Pour la fiche Google, il faut aussi votre adresse ou votre zone d’activité.',
+    },
+    {
+      q: 'Combien ça coûte ?',
+      r: 'Chaque projet est différent, donc chaque devis aussi. Écrivez-nous sur WhatsApp : le devis est gratuit.',
+    },
+    {
+      q: 'Est-ce que vous assurez le suivi ?',
+      r: 'Oui. Après la mise en ligne, on peut gérer vos réseaux sociaux et tenir votre fiche Google à jour.',
+    },
   ],
+  autreQuestion: 'Une autre question ?',
+  autreBouton: 'Posez-la sur WhatsApp',
 } as const;
 
 export const ctaFinal = {

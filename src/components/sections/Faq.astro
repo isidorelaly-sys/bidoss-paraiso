@@ -1,6 +1,7 @@
 ---
 import Icone from '../ui/Icone.astro';
-import { faq } from '../../content/textes';
+import Bouton from '../ui/Bouton.astro';
+import { contact, faq } from '../../content/textes';
 ---
 
 <section id="faq" class="faq fond-ivoire" aria-labelledby="faq-titre">
@@ -19,6 +20,10 @@ import { faq } from '../../content/textes';
           <div class="question__reponse"><p>{q.r}</p></div>
         </details>
       ))}
+      <div class="faq__autre">
+        <p class="font-titre font-semibold text-petrole text-lg">{faq.autreQuestion}</p>
+        <Bouton href={contact.whatsapp} icone="whatsapp" variante="secondaire-clair" externe>{faq.autreBouton}</Bouton>
+      </div>
     </div>
   </div>
 </section>
@@ -36,6 +41,13 @@ import { faq } from '../../content/textes';
       grid-template-columns: 0.8fr 1.2fr;
       gap: 5rem;
     }
+  }
+  .faq__autre {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem 1.5rem;
+    margin-top: 2rem;
   }
   .question {
     border-bottom: 1px solid color-mix(in srgb, var(--ardoise) 20%, transparent);
