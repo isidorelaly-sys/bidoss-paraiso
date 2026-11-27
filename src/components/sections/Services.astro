@@ -1,0 +1,159 @@
+---
+import Icone from '../ui/Icone.astro';
+import { services } from '../../content/textes';
+---
+
+<section id="services" class="services fond-petrole fond-sombre motif-hex" aria-labelledby="services-titre">
+  <div class="conteneur">
+    <div class="entete-section" data-revele>
+      <p class="surtitre text-or-pale">{services.surtitre}</p>
+      <h2 id="services-titre" class="titre-2 text-or">{services.titre}</h2>
+    </div>
+
+    <ul class="services__grille" data-services>
+      {services.liste.map((s, i) => (
+        <li class="service" style={`--i:${i}`} data-service>
+          <button type="button" class="service__hex" aria-expanded="false" aria-controls={`benefice-${s.id}`} data-service-bouton>
+            <svg class="service__forme" viewBox="0 0 100 115.47" aria-hidden="true" focusable="false">
+              <polygon class="service__fond" points="50,1 99,29.13 99,86.34 50,114.47 1,86.34 1,29.13" />
+              <polygon class="service__contour" points="50,1 99,29.13 99,86.34 50,114.47 1,86.34 1,29.13" pathLength="1" />
+            </svg>
+            <span class="service__contenu">
+              <Icone nom={s.id} taille={36} class="service__icone" />
+              <span class="service__titre">{s.titre}</span>
+            </span>
+          </button>
+          <p id={`benefice-${s.id}`} class="service__benefice">{s.benefice}</p>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .services {
+    padding: clamp(5rem, 12vw, 9rem) 0;
+  }
+  .entete-section {
+    max-width: 40rem;
+    margin-bottom: clamp(2.5rem, 6vw, 4.5rem);
+  }
+  .entete-section .surtitre {
+    margin-bottom: 0.75rem;
+  }
+  .services__grille {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem 1rem;
+  }
+  @media (min-width: 960px) {
+    .services__grille {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 2rem;
+    }
+    /* Effet nid d'abeille : cartes paires décalées */
+    .service:nth-child(even) {
+      translate: 0 3.5rem;
+    }
+    .services__grille {
+      padding-bottom: 3.5rem;
+    }
+  }
+  .service {
+    display: grid;
+    justify-items: center;
+    gap: 1rem;
+    text-align: center;
+  }
+  .service__hex {
+    position: relative;
+    width: 100%;
+    max-width: 15rem;
+    aspect-ratio: 100 / 115.47;
+    clip-path: polygon(50% 0, 100% 25%, 100% 75%, 50% 100%, 0 75%, 0 25%);
+    cursor: pointer;
+    color: var(--ivoire);
+    -webkit-tap-highlight-color: transparent;
+  }
+  .service__hex:focus-visible {
+    outline: none;
+  }
+  .service__hex:focus-visible .service__contour {
+    stroke: var(--or-pale);
+    stroke-width: 4;
+  }
+  .service__forme {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .service__fond {
+    fill: var(--nuit);
+  }
+  .service__contour {
+    fill: none;
+    stroke: var(--or);
+    stroke-width: 2;
+    stroke-dasharray: 1;
+    stroke-dashoffset: 0;
+  }
+  .service__contenu {
+    position: absolute;
+    inset: 22% 12%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+  }
+  .service__contenu :global(.service__icone) {
+    color: var(--or);
+  }
+  .service__contenu :global(.service__icone *) {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 0;
+  }
+  .service__titre {
+    font: 600 clamp(0.9375rem, 2.6vw, 1.125rem)/1.25 var(--font-titre);
+  }
+  .service__benefice {
+    max-width: 22ch;
+    font-size: 0.9375rem;
+    min-height: 4.5em;
+    color: var(--ivoire);
+  }
+
+  /* Avec JS : bénéfice révélé au survol, au focus ou au toucher */
+  :global(html.js) .service__benefice {
+    opacity: 0;
+    translate: 0 12px;
+    transition:
+      opacity 0.5s var(--ease-out-power3),
+      translate 0.5s var(--ease-out-expo);
+  }
+  :global(html.js) .service:hover .service__benefice,
+  :global(html.js) .service:focus-within .service__benefice,
+  :global(html.js) .service.est-actif .service__benefice {
+    opacity: 1;
+    translate: 0 0;
+  }
+  /* Icône : le trait se redessine */
+  .service:hover :global(.service__icone *),
+  .service:focus-within :global(.service__icone *),
+  .service.est-actif :global(.service__icone *) {
+    animation: dessine 0.7s var(--ease-out-power3) both;
+  }
+  .service:hover .service__fond,
+  .service.est-actif .service__fond,
+  .service:focus-within .service__fond {
+    fill: color-mix(in srgb, var(--nuit) 70%, var(--petrole));
+  }
+  .service__fond {
+    transition: fill 0.4s var(--ease-out-power3);
+  }
+  @keyframes dessine {
+    from { stroke-dashoffset: 1; }
+    to { stroke-dashoffset: 0; }
+  }
+</style>

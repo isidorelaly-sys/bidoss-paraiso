@@ -1,0 +1,59 @@
+---
+import Icone from '../ui/Icone.astro';
+import { pourquoi } from '../../content/textes';
+---
+
+<section id="pourquoi" class="pourquoi fond-petrole fond-sombre motif-hex" aria-labelledby="pourquoi-titre">
+  <div class="conteneur">
+    <div class="pourquoi__entete" data-revele>
+      <p class="surtitre text-or-pale">{pourquoi.surtitre}</p>
+      <h2 id="pourquoi-titre" class="titre-2 text-or mt-3">{pourquoi.titre}</h2>
+    </div>
+    <ul class="valeurs" data-valeurs>
+      {pourquoi.valeurs.map((v) => (
+        <li class="valeur" data-valeur>
+          <span class="valeur__icone"><Icone nom={v.id} taille={32} /></span>
+          <h3 class="valeur__titre">{v.titre}</h3>
+          <p>{v.texte}</p>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+  .pourquoi {
+    padding: clamp(5rem, 12vw, 9rem) 0;
+  }
+  .pourquoi__entete {
+    max-width: 40rem;
+    margin-bottom: clamp(2.5rem, 6vw, 4rem);
+  }
+  .valeurs {
+    display: grid;
+    gap: 2.5rem 2rem;
+  }
+  @media (min-width: 640px) {
+    .valeurs { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (min-width: 1100px) {
+    .valeurs { grid-template-columns: repeat(4, 1fr); }
+  }
+  .valeur {
+    padding-top: 1.5rem;
+    border-top: 2px solid color-mix(in srgb, var(--or) 45%, transparent);
+  }
+  .valeur__icone {
+    display: inline-grid;
+    color: var(--or);
+  }
+  .valeur__icone :global(*) {
+    stroke-dasharray: 1;
+    stroke-dashoffset: 0;
+  }
+  .valeur__titre {
+    margin: 1rem 0 0.5rem;
+    font-size: 1.5rem;
+    color: var(--or);
+  }
+</style>

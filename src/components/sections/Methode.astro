@@ -1,0 +1,157 @@
+---
+import { methode } from '../../content/textes';
+---
+
+<section id="methode" class="methode fond-nuit fond-sombre" aria-labelledby="methode-titre" data-methode>
+  <div class="methode__epingle" data-methode-epingle>
+    <div class="conteneur">
+      <div class="methode__entete">
+        <p class="surtitre text-or-pale">{methode.surtitre}</p>
+        <h2 id="methode-titre" class="titre-2 text-or mt-3">{methode.titre}</h2>
+      </div>
+
+      <div class="etapes" data-etapes>
+        <span class="etapes__rail" aria-hidden="true"><span class="etapes__ligne" data-ligne></span></span>
+        <ol class="etapes__liste">
+        {methode.etapes.map((e, i) => (
+          <li class="etape" data-etape={i}>
+            <span class="etape__noeud" aria-hidden="true">
+              <svg viewBox="0 0 40 46"><polygon points="20,2 38,12.5 38,33.5 20,44 2,33.5 2,12.5" /></svg>
+              <span>{i + 1}</span>
+            </span>
+            <div>
+              <h3 class="etape__nom">{e.nom}</h3>
+              <p class="etape__texte">{e.texte}</p>
+            </div>
+          </li>
+        ))}
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .methode__epingle {
+    min-height: 100svh;
+    display: flex;
+    align-items: center;
+    padding: clamp(5rem, 10vw, 7rem) 0;
+  }
+  .methode__entete {
+    margin-bottom: clamp(2.5rem, 6vw, 4rem);
+  }
+  .etapes {
+    position: relative;
+    --noeud: 46px;
+  }
+  .etapes__liste {
+    display: grid;
+    gap: 2rem;
+  }
+  /* Rail vertical (mobile) */
+  .etapes__rail {
+    position: absolute;
+    left: calc(var(--noeud) / 2 - 1px);
+    top: calc(var(--noeud) / 2);
+    bottom: calc(var(--noeud) / 2);
+    width: 2px;
+    background: color-mix(in srgb, var(--ivoire) 18%, transparent);
+  }
+  .etapes__ligne {
+    position: absolute;
+    inset: 0;
+    background: var(--or);
+    transform-origin: top;
+    transform: scaleY(1);
+  }
+  .etape {
+    position: relative;
+    display: grid;
+    align-content: start;
+    grid-template-columns: var(--noeud) 1fr;
+    gap: 1.25rem;
+    align-items: start;
+  }
+  .etape__noeud {
+    position: relative;
+    width: var(--noeud);
+    height: calc(var(--noeud) * 1.15);
+    display: grid;
+    place-items: center;
+    font: 600 1rem/1 var(--font-titre);
+    color: var(--nuit);
+  }
+  .etape__noeud svg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .etape__noeud polygon {
+    fill: var(--or);
+    stroke: var(--or);
+    stroke-width: 2;
+    transition: fill 0.4s var(--ease-out-power3);
+  }
+  .etape__noeud span {
+    position: relative;
+    transition: color 0.4s var(--ease-out-power3);
+  }
+  .etape__nom {
+    font-size: 1.375rem;
+    color: var(--or);
+    margin-top: 0.6rem;
+  }
+  .etape__texte {
+    margin-top: 0.4rem;
+    max-width: 30ch;
+    transition: opacity 0.4s var(--ease-out-power3);
+  }
+
+  /* Avec JS : étapes éteintes jusqu'à ce que la ligne les atteigne */
+  :global(html.js) .methode:not(.est-statique) .etapes__ligne {
+    transform: scaleY(0);
+  }
+  :global(html.js) .methode:not(.est-statique) .etape:not(.est-allumee) .etape__noeud polygon {
+    fill: var(--nuit);
+  }
+  :global(html.js) .methode:not(.est-statique) .etape:not(.est-allumee) .etape__noeud span {
+    color: var(--or-pale);
+  }
+  /* Éteint mais lisible (contraste ≥ 4,5:1 vérifié) */
+  :global(html.js) .methode:not(.est-statique) .etape:not(.est-allumee) .etape__nom,
+  :global(html.js) .methode:not(.est-statique) .etape:not(.est-allumee) .etape__texte {
+    color: color-mix(in srgb, var(--ivoire) 68%, var(--nuit));
+  }
+  .etape__nom,
+  .etape__texte {
+    transition: color 0.4s var(--ease-out-power3);
+  }
+
+  /* Rail horizontal (desktop) */
+  @media (min-width: 960px) {
+    .etapes__liste {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+    }
+    .etapes__rail {
+      left: calc(var(--noeud) / 2);
+      right: calc(25% - var(--noeud) / 2 - 1.5rem);
+      top: calc(var(--noeud) * 0.575 - 1px);
+      bottom: auto;
+      height: 2px;
+      width: auto;
+    }
+    .etapes__ligne {
+      transform-origin: left;
+    }
+    :global(html.js) .methode:not(.est-statique) .etapes__ligne {
+      transform: scaleX(0);
+    }
+    .etape {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+  }
+</style>

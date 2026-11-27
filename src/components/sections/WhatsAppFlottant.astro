@@ -1,0 +1,36 @@
+---
+import Icone from '../ui/Icone.astro';
+import { contact, footer } from '../../content/textes';
+---
+
+<a class="wa-flottant" href={contact.whatsapp} target="_blank" rel="noopener" aria-label={`${footer.whatsappFlottant} (s'ouvre dans WhatsApp)`}>
+  <Icone nom="whatsapp" taille={24} />
+  <span>Devis</span>
+</a>
+
+<style>
+  .wa-flottant {
+    position: fixed;
+    right: 16px;
+    bottom: max(16px, env(safe-area-inset-bottom));
+    z-index: 40;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 56px;
+    padding: 0 20px 0 16px;
+    border-radius: 999px;
+    background: var(--or);
+    color: var(--nuit);
+    font: 600 1rem/1 var(--font-texte);
+    border: 2px solid var(--nuit);
+  }
+  .wa-flottant:focus-visible {
+    outline-color: var(--nuit);
+  }
+  @media (min-width: 960px) {
+    .wa-flottant {
+      display: none;
+    }
+  }
+</style>

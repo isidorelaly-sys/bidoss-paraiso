@@ -1,0 +1,240 @@
+---
+import Icone from '../ui/Icone.astro';
+import { demo } from '../../content/textes';
+---
+
+<section class="demo fond-ivoire" aria-labelledby="demo-titre" data-demo>
+  <div class="demo__epingle" data-demo-epingle>
+    <div class="conteneur demo__grille">
+      <div class="demo__texte">
+        <p class="surtitre text-petrole">{demo.surtitre}</p>
+        <h2 id="demo-titre" class="titre-2 text-petrole mt-3">{demo.titre}</h2>
+        <p class="mt-4 text-lg max-w-[32ch]">{demo.texte}</p>
+        <ol class="demo__etapes">
+          {demo.etapes.map((e, i) => (
+            <li class="demo__etape" data-demo-etape={i}><span class="demo__num" aria-hidden="true">0{i + 1}</span>{e}</li>
+          ))}
+        </ol>
+      </div>
+
+      <!-- Téléphone en CSS/SVG : une marque fictive prend vie -->
+      <div class="telephone" aria-hidden="true">
+        <div class="telephone__ecran">
+          <!-- 1. Le logo se dessine -->
+          <div class="ecran ecran--logo" data-ecran="logo">
+            <svg class="marque-fictive" viewBox="0 0 120 120" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <circle class="mf-cercle" cx="60" cy="60" r="46" stroke="#075560" stroke-width="5" pathLength="1" />
+              <path class="mf-feuille" d="M40 78c0-22 16-36 40-38-2 24-16 38-40 38Zm0 0 22-20" stroke="#D9B24A" stroke-width="5" pathLength="1" />
+            </svg>
+            <p class="ecran__marque" data-mf-nom>{demo.marque}</p>
+          </div>
+          <!-- 2. Le site s'affiche -->
+          <div class="ecran ecran--site" data-ecran="site">
+            <div class="site__barre"><span class="site__pastille"></span><span class="site__nom">{demo.marque}</span><span class="site__menu"></span></div>
+            <div class="site__hero"><span class="ligne ligne--claire l80"></span><span class="ligne ligne--claire l60"></span><span class="site__bouton"></span></div>
+            <div class="site__cartes"><span></span><span></span><span></span><span></span></div>
+          </div>
+          <!-- 3. Les publications arrivent -->
+          <div class="ecran ecran--fil" data-ecran="fil">
+            {[0, 1, 2].map((i) => (
+              <div class="publication" data-publication>
+                <div class="publication__tete"><span class="site__pastille"></span><span class="ligne l40"></span></div>
+                <div class={`publication__visuel v${i}`}></div>
+                <div class="publication__actions"><Icone nom="coeur" taille={16} /><Icone nom="reseaux" taille={16} /></div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .demo {
+    position: relative;
+  }
+  .demo__epingle {
+    min-height: 100svh;
+    display: flex;
+    align-items: center;
+    padding: clamp(4.5rem, 10vw, 7rem) 0;
+  }
+  .demo__grille {
+    display: grid;
+    gap: 2.5rem;
+    align-items: center;
+    justify-items: center;
+  }
+  .demo__texte {
+    width: 100%;
+  }
+  @media (min-width: 960px) {
+    .demo__grille {
+      grid-template-columns: 1fr 1fr;
+      justify-items: start;
+    }
+  }
+  .demo__etapes {
+    display: none;
+    gap: 0.75rem;
+    margin-top: 2rem;
+    font: 600 1.125rem/1.3 var(--font-titre);
+  }
+  @media (min-width: 960px) {
+    .demo__etapes {
+      display: grid;
+    }
+    .telephone {
+      width: min(320px, calc((100svh - 6rem) / 2.06));
+    }
+  }
+  .demo__etape {
+    display: flex;
+    gap: 1rem;
+    align-items: baseline;
+    color: color-mix(in srgb, var(--ardoise) 72%, var(--ivoire));
+    transition: color 0.4s var(--ease-out-power3);
+  }
+  .demo__etape.est-actif {
+    color: var(--petrole);
+  }
+  .demo__num {
+    font-size: 0.8125rem;
+    font-family: var(--font-texte);
+  }
+
+  .telephone {
+    /* Tient toujours dans l'écran, même section épinglée */
+    width: min(300px, 70vw, calc((100svh - 22rem) / 2.06));
+    aspect-ratio: 9 / 18.5;
+    padding: 12px;
+    border-radius: 36px;
+    background: var(--ardoise);
+    justify-self: center;
+  }
+  .telephone__ecran {
+    position: relative;
+    height: 100%;
+    border-radius: 26px;
+    overflow: hidden;
+    background: var(--ivoire);
+  }
+  .ecran {
+    position: absolute;
+    inset: 0;
+  }
+  /* Sans JS : on montre l'état final (site + fil) */
+  .ecran--logo {
+    display: grid;
+    place-content: center;
+    justify-items: center;
+    gap: 12px;
+    opacity: 0;
+  }
+  .marque-fictive {
+    width: 96px;
+  }
+  .marque-fictive :global(*) {
+    stroke-dasharray: 1;
+  }
+  .ecran__marque {
+    font: 600 1.125rem/1 var(--font-titre);
+    color: var(--petrole);
+  }
+  .ecran--site {
+    display: grid;
+    grid-template-rows: auto auto 1fr;
+    gap: 12px;
+    padding: 12px;
+  }
+  .site__barre {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font: 600 0.75rem/1 var(--font-titre);
+    color: var(--petrole);
+    padding: 6px 2px;
+  }
+  .site__menu {
+    margin-left: auto;
+    width: 16px;
+    height: 8px;
+    border-block: 2px solid var(--petrole);
+  }
+  .site__pastille {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 3px solid var(--petrole);
+    flex: none;
+  }
+  .site__hero {
+    display: grid;
+    gap: 8px;
+    padding: 20px 14px;
+    border-radius: var(--rayon);
+    background: var(--petrole);
+  }
+  .ligne {
+    display: block;
+    height: 8px;
+    border-radius: 4px;
+    background: color-mix(in srgb, var(--ardoise) 20%, transparent);
+  }
+  .ligne--claire {
+    background: color-mix(in srgb, var(--ivoire) 70%, transparent);
+    height: 10px;
+  }
+  .l80 { width: 80%; }
+  .l60 { width: 60%; }
+  .l40 { width: 40%; }
+  .site__bouton {
+    width: 45%;
+    height: 22px;
+    margin-top: 6px;
+    border-radius: 6px;
+    background: var(--or);
+  }
+  .site__cartes {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .site__cartes span {
+    border-radius: var(--rayon);
+    background: color-mix(in srgb, var(--petrole) 14%, transparent);
+  }
+  .ecran--fil {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    gap: 10px;
+    padding: 12px;
+    background: color-mix(in srgb, var(--ivoire) 0%, transparent);
+  }
+  .publication {
+    padding: 10px;
+    border-radius: var(--rayon);
+    background: var(--ivoire);
+    border: 1px solid color-mix(in srgb, var(--ardoise) 15%, transparent);
+  }
+  .publication__tete {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .publication__visuel {
+    height: 56px;
+    margin: 8px 0;
+    border-radius: 6px;
+  }
+  .v0 { background: var(--or-pale); }
+  .v1 { background: color-mix(in srgb, var(--petrole) 30%, transparent); }
+  .v2 { background: var(--nuit); }
+  .publication__actions {
+    display: flex;
+    gap: 10px;
+    color: var(--petrole);
+  }
+</style>
