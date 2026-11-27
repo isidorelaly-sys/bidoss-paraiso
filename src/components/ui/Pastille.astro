@@ -1,0 +1,33 @@
+---
+interface Props {
+  ton: 'succes' | 'alerte';
+}
+const { ton } = Astro.props;
+---
+
+<span class:list={['pastille', `pastille--${ton}`]}><span class="pastille__point" aria-hidden="true"></span><slot /></span>
+
+<style>
+  .pastille {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 12px 4px 10px;
+    border-radius: 999px;
+    font: 600 0.8125rem/1.4 var(--font-texte);
+    background: var(--ivoire);
+    color: var(--ardoise);
+    border: 1px solid currentColor;
+  }
+  .pastille__point {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+  }
+  .pastille--succes .pastille__point {
+    background: var(--vert);
+  }
+  .pastille--alerte .pastille__point {
+    background: var(--corail);
+  }
+</style>

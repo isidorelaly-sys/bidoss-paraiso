@@ -1,0 +1,93 @@
+---
+import '../styles/global.css';
+import { contact, seo } from '../content/textes';
+
+interface Props {
+  titre?: string;
+  description?: string;
+  indexer?: boolean;
+}
+const { titre = seo.titre, description = seo.description, indexer = true } = Astro.props;
+const site = Astro.site ?? new URL('https://bidoss-paraiso.pages.dev');
+const canonique = new URL(Astro.url.pathname, site).href;
+const ogImage = new URL('/og-image.png', site).href;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  name: 'BIDOSS PARAISO',
+  slogan: seo.slogan,
+  description: seo.description,
+  url: site.href,
+  logo: new URL('/icons/icon-512.png', site).href,
+  image: ogImage,
+  telephone: contact.telephoneInternational,
+  areaServed: contact.zoneDesservie,
+  address: { '@type': 'PostalAddress', addressLocality: contact.ville, addressCountry: 'BJ' },
+  knowsAbout: ['Création de logo', 'Création de site web', 'Fiche Google', 'Community management'],
+};
+---
+
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{titre}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonique} />
+    {!indexer && <meta name="robots" content="noindex" />}
+
+    <link rel="preload" href="/fonts/montserrat-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/inter-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin />
+
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <meta name="theme-color" content="#075560" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:site_name" content="BIDOSS PARAISO" />
+    <meta property="og:title" content={seo.ogTitre} />
+    <meta property="og:description" content={seo.ogDescription} />
+    <meta property="og:url" content={canonique} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="BIDOSS PARAISO, votre paradis digital" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={seo.ogTitre} />
+    <meta name="twitter:description" content={seo.ogDescription} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    <!-- Marque le document dès que JS est disponible (amélioration progressive) -->
+    <script is:inline>
+      document.documentElement.classList.add('js');
+    </script>
+  </head>
+  <body>
+    <a class="lien-evitement" href="#contenu">Aller au contenu</a>
+    <slot />
+  </body>
+</html>
+
+<style is:global>
+  .lien-evitement {
+    position: fixed;
+    top: 8px;
+    left: 8px;
+    z-index: 100;
+    padding: 12px 16px;
+    border-radius: var(--rayon);
+    background: var(--nuit);
+    color: var(--ivoire);
+    font-weight: 600;
+    transform: translateY(-200%);
+  }
+  .lien-evitement:focus {
+    transform: none;
+  }
+</style>

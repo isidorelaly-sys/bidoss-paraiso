@@ -1,0 +1,76 @@
+---
+/** Page interne de contrôle des fondations (non indexée, retirée du sitemap). */
+import Base from '../layouts/Base.astro';
+import Logo from '../components/ui/Logo.astro';
+import Bouton from '../components/ui/Bouton.astro';
+import Icone, { type NomIcone } from '../components/ui/Icone.astro';
+import Pastille from '../components/ui/Pastille.astro';
+import Hexagone from '../components/ui/Hexagone.astro';
+
+const couleurs = [
+  ['petrole', '#075560'], ['nuit', '#04343C'], ['or', '#D9B24A'], ['or-pale', '#F0DC9C'],
+  ['ivoire', '#F8F5EC'], ['ardoise', '#243238'], ['vert', '#2E9E6B'], ['corail', '#E0604A'],
+] as const;
+const icones: NomIcone[] = ['logo', 'site', 'google', 'reseaux', 'confiance', 'proximite', 'rapidite', 'rigueur', 'whatsapp', 'fleche', 'recherche'];
+---
+
+<Base titre="Fondations · BIDOSS PARAISO" indexer={false}>
+  <main id="contenu">
+    <section class="fond-petrole fond-sombre motif-hex py-16">
+      <div class="conteneur grid gap-10 md:grid-cols-2 items-center">
+        <Logo variante="logo_vertical" couleur="couleur" class="w-56" />
+        <div class="space-y-6">
+          <p class="surtitre text-or-pale">Fondations</p>
+          <h1 class="titre-1 text-or">Votre entreprise mérite d'être vue.</h1>
+          <p class="max-w-prose">Texte courant ivoire sur bleu pétrole. Inter 400, 16 px, interligne 1,5.</p>
+          <div class="flex flex-wrap gap-4">
+            <Bouton href="#" icone="whatsapp">Demander un devis sur WhatsApp</Bouton>
+            <Bouton href="#" variante="secondaire-fonce">Voir la méthode</Bouton>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="fond-ivoire py-16">
+      <div class="conteneur space-y-10">
+        <h2 class="titre-2 text-petrole">Couleurs, icônes, pastilles</h2>
+        <ul class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+          {couleurs.map(([nom, hex]) => (
+            <li class="rounded-bp border border-ardoise/20 overflow-hidden">
+              <div class="h-16" style={`background:${hex}`}></div>
+              <p class="p-3 text-sm"><strong>--{nom}</strong><br />{hex}</p>
+            </li>
+          ))}
+        </ul>
+        <div class="flex flex-wrap gap-6 text-petrole">
+          {icones.map((n) => <Icone nom={n} taille={32} />)}
+        </div>
+        <div class="flex flex-wrap gap-4">
+          <Pastille ton="succes">En ligne</Pastille>
+          <Pastille ton="alerte">À compléter</Pastille>
+          <Bouton href="#" variante="secondaire-clair">Bouton secondaire clair</Bouton>
+          <a href="#" class="lien-souligne text-petrole font-semibold">Lien souligné animé</a>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl">
+          {['Logo', 'Site web', 'Fiche Google', 'Réseaux sociaux'].map((t) => (
+            <Hexagone class="fond-petrole"><span class="font-titre font-semibold">{t}</span></Hexagone>
+          ))}
+        </div>
+        <div class="flex flex-wrap items-end gap-10">
+          <Logo variante="logo_horizontal" couleur="petrole" class="w-64" />
+          <Logo variante="icone" couleur="petrole" class="w-16" />
+        </div>
+      </div>
+    </section>
+
+    <section class="fond-or py-12">
+      <div class="conteneur flex flex-wrap gap-10 items-center">
+        <Logo variante="logo_horizontal_sans-slogan" couleur="nuit" class="w-64" />
+        <p class="font-semibold">Bleu nuit sur or</p>
+      </div>
+    </section>
+    <section class="fond-nuit fond-sombre py-12">
+      <div class="conteneur"><Logo variante="logo_horizontal" couleur="couleur" class="w-72" /></div>
+    </section>
+  </main>
+</Base>
