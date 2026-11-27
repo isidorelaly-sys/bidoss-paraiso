@@ -13,7 +13,6 @@ Rien n'a été inventé : ni tarif, ni délai, ni chiffre, ni témoignage, ni cl
 
 | # | Élément | Où il apparaît | Fichier |
 |---|---|---|---|
-| 1 | **Ancien logo** (`avant.png`) pour le curseur avant / après | Réalisations | `assets/avant-apres/avant.png` (déposez simplement le fichier) |
 | 2 | **Prochaines réalisations** (capture dans `assets/realisations/` + accord du client) | Réalisations | `src/content/textes.ts` → `realisations.clients` |
 | 3 | Relire les **réponses de la FAQ** rédigées (aucun tarif ni délai chiffré, renvoi vers WhatsApp) | FAQ | `src/content/textes.ts` → `faq` |
 | 15 | Phrase de **propriété intellectuelle** à valider | Mentions légales | idem |

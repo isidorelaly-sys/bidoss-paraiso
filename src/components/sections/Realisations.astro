@@ -26,7 +26,7 @@ const capture = (nom: string) => captures[`/assets/realisations/${nom}`]?.defaul
       <div class="comparateur" data-comparateur style="--position: 50%">
         <div class="comparateur__vue comparateur__vue--avant">
           {avant ? (
-            <Picture src={avant} formats={['avif', 'webp']} widths={[480, 800, 1200]} sizes="(min-width: 960px) 800px, 100vw" alt="Ancien logo de BIDOSS PARAISO" loading="lazy" class="comparateur__img" />
+            <Picture src={avant} formats={['avif', 'webp']} widths={[480, 800, 1200]} sizes="(min-width: 960px) 800px, 100vw" alt="Ancien logo de BIDOSS PARAISO" loading="lazy" class="comparateur__img comparateur__img--plein" />
           ) : (
             <p class="comparateur__manquant">{realisations.avantManquant}</p>
           )}
@@ -122,6 +122,12 @@ const capture = (nom: string) => captures[`/assets/realisations/${nom}`]?.defaul
     width: 60%;
     height: 62%;
     object-fit: contain;
+  }
+  /* L'ancien logo a son propre fond : il remplit tout le cadre */
+  .comparateur__vue :global(.comparateur__img--plein) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
   .comparateur__manquant {
     position: absolute;
