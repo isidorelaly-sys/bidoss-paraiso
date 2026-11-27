@@ -20,11 +20,11 @@ import { contact } from '../content/textes';
         <h2>Éditeur du site</h2>
         <p>BIDOSS PARAISO, entreprise individuelle de M. OUSSOU LALY Isidore Jean de Dieu</p>
         <p>Responsable de la publication : OUSSOU LALY Isidore Jean de Dieu</p>
-        <p>Siège : quartier Arafat</p>
+        <p>Siège : quartier Arafat, Parakou</p>
         <p>RCCM n° RB/PKO/21 A 11278, Greffe du Tribunal de Commerce de Cotonou, entreprise immatriculée le 21/05/2021</p>
         <p>IFU : 0202112360382</p>
         <p>Téléphone et WhatsApp : {contact.telephoneAffiche}</p>
-        <p>E-mail : {contact.email}</p>
+        <p>E-mail : <a class="lien-souligne" href={`mailto:${contact.email}`}>{contact.email}</a></p>
       </section>
       <section>
         <h2>Hébergement</h2>

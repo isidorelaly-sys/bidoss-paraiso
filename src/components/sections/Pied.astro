@@ -18,7 +18,11 @@ import { contact, footer, menu } from '../../content/textes';
       <a class="pied__wa" href={contact.whatsapp} target="_blank" rel="noopener">
         <Icone nom="whatsapp" taille={20} /> WhatsApp : {contact.telephoneAffiche}
       </a>
-      <p>Facebook : {contact.facebook}</p>
+      <a class="lien-souligne" href={`mailto:${contact.email}`}>{contact.email}</a>
+      {contact.pageOfficielle && (
+        <a class="lien-souligne" href={contact.pageOfficielle} target="_blank" rel="noopener">Notre page officielle</a>
+      )}
+      <p>{contact.ville}, Bénin</p>
     </div>
   </div>
   <div class="conteneur pied__bas">
@@ -59,6 +63,7 @@ import { contact, footer, menu } from '../../content/textes';
   }
   .pied__contact {
     display: grid;
+    justify-items: start;
     gap: 0.75rem;
   }
   .pied__wa {

@@ -16,11 +16,7 @@ Rien n'a été inventé : ni tarif, ni délai, ni chiffre, ni témoignage, ni cl
 | 1 | **Ancien logo** (`avant.png`) pour le curseur avant / après | Réalisations | `assets/avant-apres/avant.png` (déposez simplement le fichier) |
 | 2 | **Prochaines réalisations** (capture dans `assets/realisations/` + accord du client) | Réalisations | `src/content/textes.ts` → `realisations.clients` |
 | 3 | Relire les **réponses de la FAQ** rédigées (aucun tarif ni délai chiffré, renvoi vers WhatsApp) | FAQ | `src/content/textes.ts` → `faq` |
-| 8 | **Lien de la page Facebook** | Pied de page | `src/content/textes.ts` → `contact.facebook` |
-| 9 | **E-mail professionnel** | Mentions légales | `contact.email` |
-| 10 | **Ville** affichée | Données Google (JSON-LD) | `contact.ville` |
-| 11 | **Zone desservie** (ex. tout le Bénin, un département) | Données Google (JSON-LD) | `contact.zoneDesservie` |
-| 12 | **Ville du siège** (quartier Arafat, dans quelle ville ?) | Mentions légales | `src/pages/mentions-legales.astro` |
+| 8 | **Lien de la page officielle** (Facebook ou autre) | Pied de page | `src/content/textes.ts` → `contact.pageOfficielle` |
 | 15 | Phrase de **propriété intellectuelle** à valider | Mentions légales | idem |
 | 16 | Phrase **données personnelles** à valider | Mentions légales | idem |
 | 17 | **Nom de domaine** : pas pour l'instant, le site utilise l'adresse gratuite Cloudflare Pages (`bidoss-paraiso.pages.dev`). À changer le jour où un domaine est acheté | Liens de partage, sitemap | variable `SITE_URL` |

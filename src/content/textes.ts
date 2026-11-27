@@ -10,10 +10,11 @@ export const contact = {
   telephoneInternational: '+2290154888881',
   whatsapp:
     'https://wa.me/2290154888881?text=Bonjour%20BIDOSS%20PARAISO%2C%20je%20souhaite%20un%20devis%20pour%20ma%20pr%C3%A9sence%20en%20ligne.',
-  facebook: '[à compléter]',
-  email: '[à compléter]',
-  ville: '[à compléter]',
-  zoneDesservie: '[à compléter]',
+  /** Lien de la page officielle (Facebook…). Laissez '' tant qu'il n'existe pas. */
+  pageOfficielle: '',
+  email: 'bidossparaiso@gmail.com',
+  ville: 'Cotonou',
+  zoneDesservie: 'Bénin',
 } as const;
 
 export const seo = {
