@@ -14,7 +14,7 @@ Rien n'a été inventé : ni tarif, ni délai, ni chiffre, ni témoignage, ni cl
 | # | Élément | Où il apparaît | Fichier |
 |---|---|---|---|
 | 1 | **Ancien logo** (`avant.png`) pour le curseur avant / après | Réalisations | `assets/avant-apres/avant.png` (déposez simplement le fichier) |
-| 2 | **Lien public du portfolio** (pour rendre la carte cliquable) et **prochaines réalisations** (capture dans `assets/realisations/` + accord du client) | Réalisations | `src/content/textes.ts` → `realisations.clients` |
+| 2 | **Prochaines réalisations** (capture dans `assets/realisations/` + accord du client) | Réalisations | `src/content/textes.ts` → `realisations.clients` |
 | 3 | Relire les **réponses de la FAQ** rédigées (aucun tarif ni délai chiffré, renvoi vers WhatsApp) | FAQ | `src/content/textes.ts` → `faq` |
 | 8 | **Lien de la page Facebook** | Pied de page | `src/content/textes.ts` → `contact.facebook` |
 | 9 | **E-mail professionnel** | Mentions légales | `contact.email` |
